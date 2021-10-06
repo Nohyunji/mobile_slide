@@ -12,16 +12,25 @@
 
 .App .content{
   position: relative;
+  /* border:1px solid red; */
 }
 
-.App .content .media_list{
+.App .content .list_wrap{
   position: absolute;
   top: 82px;
   left: 22px;
   width: 296px;
+  height: 523px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border:1px solid red;
+}
+.App .content .media_list{
+  width: 296px;
   height: 1046px;
   color:#fff;
-  overflow: hidden;
   display: flex;
   align-items: center;
   flex-direction: column;

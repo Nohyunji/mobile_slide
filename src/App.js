@@ -39,13 +39,15 @@ function App() {
       <div className="app_wrap">
         <div className="content">
           <img src ="/img/mobile.png"/>
-
-          <div className={ slide ? `media_list slide_time` : `media_list`}>
-            {media.map((media, index) => 
-              <video autoPlay loop muted key={index}>
-                <source src={media.url} type="video/mp4" />
-              </video> 
-            )}           
+          
+          <div className="list_wrap">
+            <div className={ slide ? `media_list slide_time` : `media_list`}>
+              {media.map((media, index) => 
+                <video autoPlay loop muted key={index}>
+                  <source src={media.url} type="video/mp4" />
+                </video> 
+              )}           
+            </div>
           </div>
         </div>
       </div>
