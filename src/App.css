@@ -12,7 +12,6 @@
 
 .App .content{
   position: relative;
-  /* border:1px solid red; */
 }
 
 .App .content .list_wrap{
@@ -25,7 +24,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  border:1px solid red;
 }
 .App .content .media_list{
   width: 296px;

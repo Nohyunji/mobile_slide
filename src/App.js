@@ -23,8 +23,9 @@ function App() {
       SetSlide(true);
 
       setTimeout(() => {
-
-        media.pop(media[0]);
+        media.splice(0,1);
+        media.push()
+        // console.log("Newmedia::", newMedia);
 
         console.log("media::", media);
         
@@ -39,7 +40,7 @@ function App() {
       <div className="app_wrap">
         <div className="content">
           <img src ="/img/mobile.png"/>
-          
+
           <div className="list_wrap">
             <div className={ slide ? `media_list slide_time` : `media_list`}>
               {media.map((media, index) => 
