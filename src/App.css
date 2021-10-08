@@ -14,31 +14,53 @@
   position: relative;
 }
 
-.App .content .list_wrap{
+.App .content .list_wrap {
   position: absolute;
   top: 82px;
   left: 22px;
   width: 296px;
-  height: 523px;
+  height: 525px;
   overflow: hidden;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
+
 .App .content .media_list{
   width: 296px;
-  height: 1046px;
+  height: 525px !important;
   color:#fff;
   display: flex;
   align-items: center;
   flex-direction: column;
+  /* transition-delay: 0s;
+  transform: translateY(0px);  */
 }
 
 .App .content .media_list video{
-  min-height: 523px;
+  min-height: 525px;
+  max-height: 525px;
+
 }
 
 .slide_time{
-    transform: translateY(-523px); 
-    transition: 5s;
+  transform: translateY(-525px); 
+  transition: 4s;
+  transition-delay: 4s;
 }
+
+.slide_time_reset{
+  transform: translateY(0px); 
+  transition-delay: 0s;
+}
+/* .slide_time{
+    transform: translateY(-525px); 
+    transition: 4s;
+    transition-delay: 4s;
+    transition-duration: 1s;
+}
+
+.slide_time_reset{
+  transform: translateY(0px); 
+  transition-delay: 0s;
+} */

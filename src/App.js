@@ -2,58 +2,90 @@ import React ,{ useState, useEffect } from "react";
 import './App.css';
 
 function App() {
-  const [slide, SetSlide] = useState(false);
-
-  const media = [
+  const [media, setMedia] = useState([
     {
       id: 1,
       url:"/img/couple.mp4"
     },{
       id: 2,
       url:`/img/diving.mp4`
-    },
-    // {
-    //   id: 3,
-    //   url:`/img/lanterns-phone.mp4`
-    // }
-  ]
+    }
+  ]);
+
+  // const [slide, setSlide] = useState(media[0].id); 
+  // const [cssAdd, setCssAdd] = useState(false);
 
   useEffect(()=>{
-    if(slide === false) {
-      SetSlide(true);
+    console.log("useEffect");
+    // setCssAdd(true);
 
-      setTimeout(() => {
-        media.splice(0,1);
-        media.push()
-        // console.log("Newmedia::", newMedia);
+    setInterval(timeOut, 5000);
+    
+    // return () => {
+    //   console.log("component is finished")
+    //   console.log("--------------------------------------------------------------")
+    //  }
+  },[])
 
-        console.log("media::", media);
-        
-        // SetSlide(false);
-      }, 5000);
+
+  const timeOut = () => {
+    console.log("timeOut" , media[0].id);
+
+    // let newMedia = [...media]; 
+    let newMedia = media; 
+
+    console.log("media",media);
+    if( newMedia[0].id === 1) {
+      newMedia.push({
+        id: 3,
+        url:`/img/lanterns-phone.mp4`
+      })
+
+      newMedia.shift();
     }
 
-  },[slide])
+    else if( newMedia[0].id === 2) {
+      newMedia.push({
+        id: 1,
+        url:`/img/couple.mp4`
+      })
 
-  return (
-    <div className="App">
-      <div className="app_wrap">
-        <div className="content">
-          <img src ="/img/mobile.png"/>
+      newMedia.shift();
+    }
 
-          <div className="list_wrap">
-            <div className={ slide ? `media_list slide_time` : `media_list`}>
-              {media.map((media, index) => 
-                <video autoPlay loop muted key={index}>
-                  <source src={media.url} type="video/mp4" />
-                </video> 
-              )}           
+    else if( newMedia[0].id === 3) {
+      newMedia.push({
+        id: 2,
+        url:`/img/diving.mp4`
+      })
+
+      newMedia.shift()
+    }
+
+    setMedia(newMedia);
+    
+    console.log("-------------------------");
+  }
+
+  console.log("render");
+    return (
+      <div className="App">
+        <div className="app_wrap">
+          <div className="content">
+            <img src ="/img/mobile.png"/>
+
+            <div className="list_wrap">
+                {media.map((media,index) =>
+                  <div key={index} className="media_list">
+                  {/* <div key={index} className={slide === index ? "media_list slide_time" : "media_list slide_time_reset"}> */}
+                    <video autoPlay loop muted src={media.url} type="video/mp4"></video> 
+                  </div>
+                )}           
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
 export default App;
