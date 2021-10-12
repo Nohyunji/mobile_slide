@@ -59,7 +59,7 @@ function App() {
   const [slideState, setSlideState] = useState(false);
 
   const timeOut = () => {
-    setInterval(() => {
+    setTimeout(() => {
       let slideCnt = videoList.length - 1; //3
       let newMedia = [...video];
 
@@ -86,7 +86,7 @@ function App() {
 
   useEffect(() => {
     timeOut();
-  }, []);
+  }, [video]);
 
   return (
     <div className="App">
