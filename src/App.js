@@ -98,9 +98,7 @@ function App() {
             {video.map((video, index) => (
               <div
                 key={video.id}
-                className={
-                  slideState && index === 0 ? "video_list slide_trans" : "video_list slide_reset"
-                }
+                className={slideState && index === 0 ? "video_list slide_trans" : "video_list"}
                 // className={play[index] ? "video_list slide_trans" : "video_list"}
               >
                 <video autoPlay loop muted src={video.url} type="video/mp4"></video>
