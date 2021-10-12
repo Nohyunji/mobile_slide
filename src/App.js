@@ -1,91 +1,116 @@
-import React ,{ useState, useEffect } from "react";
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+
+const videoList = [
+  {
+    id: 1,
+    url: "/img/couple.mp4",
+  },
+  {
+    id: 2,
+    url: "/img/diving.mp4",
+  },
+  {
+    id: 3,
+    url: "/img/lanterns-phone.mp4",
+  },
+  {
+    id: 4,
+    url: "/img/ski.mp4",
+  },
+];
 
 function App() {
-  const [media, setMedia] = useState([
+  const [video, setVideo] = useState([
     {
       id: 1,
-      url:"/img/couple.mp4"
-    },{
+      url: "/img/couple.mp4",
+    },
+    {
       id: 2,
-      url:`/img/diving.mp4`
-    }
+      url: `/img/diving.mp4`,
+    },
   ]);
 
-  // const [slide, setSlide] = useState(media[0].id); 
-  // const [cssAdd, setCssAdd] = useState(false);
+  // const [play, setPlay] = useState([false]);
 
-  useEffect(()=>{
-    console.log("useEffect");
-    // setCssAdd(true);
+  // const temp = () => {
+  //   let i = 2;
 
-    setInterval(timeOut, 5000);
-    
-    // return () => {
-    //   console.log("component is finished")
-    //   console.log("--------------------------------------------------------------")
-    //  }
-  },[])
+  //   setInterval(() => {
+  //     video.push(videoList[i]);
+  //     setPlay([true]);
 
+  //     video.shift();
+  //     setVideo(video);
+
+  //     if (i === videoList.length - 1) {
+  //       i = 0;
+  //     } else {
+  //       i++;
+  //     }
+  //   }, 3000);
+  // };
+
+  // useEffect(() => {
+  //   temp();
+  // }, []);
+
+  const [slideState, setSlideState] = useState(false);
 
   const timeOut = () => {
-    console.log("timeOut" , media[0].id);
+    setInterval(() => {
+      let slideCnt = videoList.length - 1; //3
+      let newMedia = [...video];
 
-    // let newMedia = [...media]; 
-    let newMedia = media; 
+      if (newMedia[0].id < slideCnt) {
+        newMedia.push({
+          id: newMedia[0].id + 2,
+          url: videoList[newMedia[0].id + 1].url,
+        });
+      } else if (newMedia[0].id >= slideCnt) {
+        newMedia.push({
+          id: newMedia[0].id - 2,
+          url: videoList[newMedia[0].id - 3].url,
+        });
+      }
 
-    console.log("media",media);
-    if( newMedia[0].id === 1) {
-      newMedia.push({
-        id: 3,
-        url:`/img/lanterns-phone.mp4`
-      })
-
-      newMedia.shift();
-    }
-
-    else if( newMedia[0].id === 2) {
-      newMedia.push({
-        id: 1,
-        url:`/img/couple.mp4`
-      })
+      setSlideState(true);
 
       newMedia.shift();
-    }
 
-    else if( newMedia[0].id === 3) {
-      newMedia.push({
-        id: 2,
-        url:`/img/diving.mp4`
-      })
+      console.log("newMedia:: ", newMedia);
+      setVideo(newMedia);
+    }, 5000);
+  };
 
-      newMedia.shift()
-    }
+  useEffect(() => {
+    timeOut();
+  }, []);
 
-    setMedia(newMedia);
-    
-    console.log("-------------------------");
-  }
+  return (
+    <div className="App">
+      <div className="app_wrap">
+        <div className="content">
+          <img src="/img/mobile.png" />
 
-  console.log("render");
-    return (
-      <div className="App">
-        <div className="app_wrap">
-          <div className="content">
-            <img src ="/img/mobile.png"/>
-
-            <div className="list_wrap">
-                {media.map((media,index) =>
-                  <div key={index} className="media_list">
-                  {/* <div key={index} className={slide === index ? "media_list slide_time" : "media_list slide_time_reset"}> */}
-                    <video autoPlay loop muted src={media.url} type="video/mp4"></video> 
-                  </div>
-                )}           
-            </div>
+          <div className="list_wrap">
+            {video.map((video, index) => (
+              <div
+                key={video.id}
+                className={
+                  slideState && index === 0 ? "video_list slide_trans" : "video_list slide_reset"
+                }
+                // className={play[index] ? "video_list slide_trans" : "video_list"}
+              >
+                <video autoPlay loop muted src={video.url} type="video/mp4"></video>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
 export default App;
