@@ -32,9 +32,10 @@ function App() {
     },
   ]);
 
+  // setInterval을 이용하여 구현하는 방법 ---------------------------
   // const [play, setPlay] = useState([false]);
 
-  // const temp = () => {
+  // const timeOut = () => {
   //   let i = 2;
 
   //   setInterval(() => {
@@ -53,35 +54,49 @@ function App() {
   // };
 
   // useEffect(() => {
-  //   temp();
+  //   timeOut();
   // }, []);
 
+  // setTimeout을 이용하여 구현하는 방법 ---------------------------
   const [slideState, setSlideState] = useState(false);
+  const [cnt, setCnt] = useState(2);
 
   const timeOut = () => {
     setTimeout(() => {
-      let slideCnt = videoList.length - 1; //3
       let newMedia = [...video];
-
-      if (newMedia[0].id < slideCnt) {
-        newMedia.push({
-          id: newMedia[0].id + 2,
-          url: videoList[newMedia[0].id + 1].url,
-        });
-      } else if (newMedia[0].id >= slideCnt) {
-        newMedia.push({
-          id: newMedia[0].id - 2,
-          url: videoList[newMedia[0].id - 3].url,
-        });
-      }
+      newMedia.push(videoList[cnt]);
 
       setSlideState(true);
 
       newMedia.shift();
+      console.log("newMedia::", newMedia);
 
-      console.log("newMedia:: ", newMedia);
+      if (cnt === videoList.length - 1) {
+        setCnt(0);
+      } else {
+        setCnt(cnt + 1);
+      }
+
       setVideo(newMedia);
-    }, 5000);
+
+      // let slideCnt = videoList.length - 1;
+      // let newMedia = [...video];
+
+      // if (newMedia[0].id < slideCnt) {
+      //   newMedia.push(videoList[i + 2]);
+      // } else if (newMedia[0].id >= slideCnt) {
+      //   newMedia.push({
+      //     id: newMedia[0].id - 2,
+      //     url: videoList[newMedia[0].id - 3].url,
+      //   });
+      // }
+
+      // setSlideState(true);
+
+      // newMedia.shift();
+
+      // setVideo(newMedia);
+    }, 3000);
   };
 
   useEffect(() => {
