@@ -60,16 +60,16 @@ function App() {
   // setTimeout을 이용하여 구현하는 방법 ---------------------------
   const [slideState, setSlideState] = useState(false);
   const [cnt, setCnt] = useState(2);
+  const [time, setTime] = useState(6000);
 
   const timeOut = () => {
     setTimeout(() => {
       let newMedia = [...video];
       newMedia.push(videoList[cnt]);
-
+      setTime(3000);
       setSlideState(true);
 
       newMedia.shift();
-      console.log("newMedia::", newMedia);
 
       if (cnt === videoList.length - 1) {
         setCnt(0);
@@ -96,8 +96,18 @@ function App() {
       // newMedia.shift();
 
       // setVideo(newMedia);
+    }, time);
+  };
+
+  const firstTimeOut = () => {
+    setTimeout(() => {
+      setSlideState(true);
     }, 3000);
   };
+
+  useEffect(() => {
+    firstTimeOut();
+  }, []);
 
   useEffect(() => {
     timeOut();
